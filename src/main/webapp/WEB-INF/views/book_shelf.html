@@ -31,6 +31,7 @@
     </style>
 </head>
 <body>
+<div id="index_list" th:replace="index :: index_list"></div>
 <div id="root_container">
     <!--/*@thymesVar id="book" type="org.example.web.dto.Book"*/-->
     <form method="post" th:action="@{/books/save}" th:object="${book}">
@@ -64,7 +65,6 @@
             </tr>
         </table>
     </form>
-
 
     <table id="books">
         <tr>

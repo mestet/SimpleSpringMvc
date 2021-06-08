@@ -1,5 +1,15 @@
 package org.example.web.dto;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book {
 
     private Integer id;
@@ -7,61 +17,10 @@ public class Book {
     private String title;
     private String pages;
 
-    public Book() {
-    }
-
-    public Book(Integer id, String author, String title, String pages) {
-        this.id = id;
-        this.author = author;
-        this.title = title;
-        this.pages = pages;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getPages() {
-        return pages;
-    }
-
-    public void setPages(String pages) {
-        this.pages = pages;
-    }
-
-    public boolean hasAttributes() {
+    public boolean hasAnyAttribute() {
         return (title != null && !title.isEmpty())
                 || (author != null && !author.isEmpty())
                 || (pages != null && !pages.isEmpty());
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", author='" + author + '\'' +
-                ", title='" + title + '\'' +
-                ", pages='" + pages + '\'' +
-                '}';
-    }
 }

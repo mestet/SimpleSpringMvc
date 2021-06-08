@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index page</title>
+    <style>
+        #index_list {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="index_list" th:fragment="index_list">
+    <a th:href="@{/}">index</a>
+    <br/>
+    <a th:href="@{/login}">login page</a>
+    <br/>
+    <a th:href="@{/user/register}">register page</a>
+    <br/>
+    <a th:href="@{/books/shelf}">book shelf</a>
+    <br/>
+    <a th:href="@{/images/book}">random book image</a>
+    <br/>
+</div>
+</body>
+</html>

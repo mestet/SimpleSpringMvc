@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       lang="en">
@@ -5,32 +6,37 @@
     <title>Book shelf login</title>
     <meta charset="UTF-8">
     <style>
-        #login_form{
+        #login_form {
             position: absolute;
             left: 50%;
             top: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
         }
 
-        .login_item{
+        .login_item {
             margin-bottom: 10px;
+            margin-left: 1px;
         }
 
     </style>
 </head>
 <body>
-    <div id="login_form">
-        <form method="post" th:action="@{/login/auth}" th:object="${loginForm}">
-            <img class="login_item" th:src="@{/images/h3_spellbook.png}"/>
-            <br>
-            <input class="login_item" type="text" placeholder="enter username"
-                    th:field="*{username}">
-            <br>
-            <input class="login_item" type="password" placeholder="password"
-                   th:field="*{password}">
-            <br>
-            <input class="login_item" type="submit" value="login">
-        </form>
-    </div>
+<div id="index_list" th:replace="index :: index_list"></div>
+<div id="login_form">
+    <form method="post" th:action="@{/login/auth}" th:object="${userLoginForm}">
+        <img class="login_item" th:src="@{/images/h3_spellbook.png}"/>
+        <br>
+        <input class="login_item" type="text" placeholder="enter username"
+               th:field="*{username}">
+        <br>
+        <input class="login_item" type="password" placeholder="password"
+               th:field="*{password}">
+        <br>
+        <input class="login_item" type="submit" value="login">
+    </form>
+    <form method="get" th:action="@{/user/register}">
+        <input class="login_item" type="submit" value="register new user">
+    </form>
+</div>
 </body>
 </html>

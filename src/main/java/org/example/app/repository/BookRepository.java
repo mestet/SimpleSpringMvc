@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @Repository
 public class BookRepository implements ProjectRepository<Book> {
 
@@ -17,10 +16,11 @@ public class BookRepository implements ProjectRepository<Book> {
     private final Map<Integer, Book> repo = new HashMap<>();
 
     @Override
-    public void store(Book book) {
+    public boolean store(Book book) {
         book.setId(book.hashCode());
         logger.info("Store new book: " + book);
         repo.put(book.getId(), book);
+        return true;
     }
 
     @Override
@@ -29,8 +29,8 @@ public class BookRepository implements ProjectRepository<Book> {
     }
 
     @Override
-    public boolean removeById(Integer id) {
-        logger.info("Deleting book by id: " + id);
-        return repo.remove(id) != null;
+    public boolean remove(Book book) {
+        logger.info("Deleting book by id: " + book.getId());
+        return repo.remove(book.getId()) != null;
     }
 }

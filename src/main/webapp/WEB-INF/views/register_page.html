@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <title>Register new user</title>
+    <meta charset="UTF-8">
+    <style>
+        #register_form {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .register_item {
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="index_list" th:replace="index :: index_list"></div>
+<div id="register_form">
+    <form method="post" th:action="@{/user/register}" th:object="${userLoginForm}">
+        <input class="register_item" type="text" placeholder="enter username"
+               th:field="*{username}">
+        <br>
+        <input class="register_item" type="password" placeholder="type password"
+               th:field="*{password}">
+        <br>
+        <input class="register_item" type="submit" value="register">
+    </form>
+</div>
+</body>
+</html>

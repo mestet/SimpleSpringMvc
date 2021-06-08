@@ -1,6 +1,5 @@
 package org.example.app.services;
 
-import org.example.app.repository.BookRepository;
 import org.example.app.repository.ProjectRepository;
 import org.example.web.dto.Book;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,24 +10,26 @@ import java.util.List;
 @Service
 public class BookService {
 
-    private final ProjectRepository<Book> bookRepo;
+    private final ProjectRepository<Book> repository;
 
     @Autowired
-    public BookService(BookRepository bookRepo) {
-        this.bookRepo = bookRepo;
+    public BookService(ProjectRepository<Book> repository) {
+        this.repository = repository;
     }
 
     public void saveBook(Book book) {
-        if (book.hasAttributes()) {
-            bookRepo.store(book);
+        if (book.hasAnyAttribute()) {
+            repository.store(book);
         }
     }
 
     public List<Book> getAllBooks() {
-        return bookRepo.retrieveAll();
+        return repository.retrieveAll();
     }
 
     public boolean removeBookById(Integer bookId) {
-        return bookRepo.removeById(bookId);
+        return repository.remove(Book.builder()
+                .id(bookId)
+                .build());
     }
 }
