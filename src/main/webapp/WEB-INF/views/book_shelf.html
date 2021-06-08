@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <title>My book shelf</title>
+    <meta charset="UTF-8">
+    <style>
+        #root_container {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #books {
+            width: 50%;
+            border-collapse: collapse;
+        }
+
+        table {
+            margin: 25px;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        th, td {
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+<div id="root_container">
+    <!--/*@thymesVar id="book" type="org.example.web.dto.Book"*/-->
+    <form method="post" th:action="@{/books/save}" th:object="${book}">
+        <table>
+            <tr>
+                <td>
+                    <input type="text" placeholder="author" th:field="*{author}">
+                </td>
+                <td>
+                    <input type="text" placeholder="book title" th:field="*{title}">
+                </td>
+                <td>
+                    <input type="text" placeholder="size (pages)" th:field="*{pages}">
+                </td>
+                <td>
+                    <input type="submit" value="save">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form method="post" th:action="@{/books/remove}">
+        <table>
+            <tr>
+                <td>
+                    <input type="text" placeholder="book id" th:name="bookId">
+                </td>
+                <td>
+                    <input type="submit" value="delete">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+
+    <table id="books">
+        <tr>
+            <th>id</th>
+            <th>author</th>
+            <th>title</th>
+            <th>size</th>
+        </tr>
+        <tr th:each="book : ${bookList}">
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.pages}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
