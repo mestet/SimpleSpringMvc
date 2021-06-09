@@ -6,10 +6,8 @@
     <meta charset="UTF-8">
     <style>
         #root_container {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+            position: relative;
+            left: 200px;
         }
 
         #books {
@@ -89,8 +87,6 @@
             </tr>
         </table>
     </form>
-
-
 
     <form class="button" method="post" th:action="@{/books/generate}">
         <input type="submit" value="generate random book">

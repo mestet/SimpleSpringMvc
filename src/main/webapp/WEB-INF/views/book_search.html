@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <title>My book shelf</title>
+    <meta charset="UTF-8">
+    <style>
+        #root_container {
+            position: relative;
+            left: 200px;
+        }
+
+        #books {
+            width: 50%;
+            border-collapse: collapse;
+        }
+
+        .button {
+            position: relative;
+            left: 30px
+        }
+
+        table {
+            margin: 25px;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        th, td {
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+<div id="index_list" th:replace="index :: index_list"></div>
+<div id="root_container">
+    <!--/*@thymesVar id="book" type="org.example.web.dto.Book"*/-->
+    <form method="post" th:action="@{/books/search}" th:object="${criteriaBook}">
+        <table>
+            <tr>
+                <td>
+                    <input type="text" placeholder="author regex" th:field="*{author}">
+                </td>
+                <td>
+                    <input type="text" placeholder="title regex" th:field="*{title}">
+                </td>
+                <td>
+                    <input type="text" placeholder="size regex" th:field="*{size}">
+                </td>
+                <td>
+                    <input type="submit" value="search">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+
+    <table id="books">
+        <tr>
+            <th>id</th>
+            <th>author</th>
+            <th>title</th>
+            <th>size</th>
+        </tr>
+        <tr th:each="book : ${searchResultList}">
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.size}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
