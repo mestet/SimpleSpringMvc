@@ -38,6 +38,13 @@ public class BooksController {
         return "redirect:/books/shelf";
     }
 
+    @PostMapping("/generate")
+    public String generateBook() {
+        logger.info("POST /books/generate");
+        bookService.generateBook();
+        return "redirect:/books/shelf";
+    }
+
     @PostMapping("/remove")
     public String removeBook(@RequestParam(value = "bookId") Integer bookId, Model model) {
         logger.info("POST /books/remove?bookId=" + bookId);
@@ -46,5 +53,22 @@ public class BooksController {
         } else {
             return bookShelf(model);
         }
+    }
+
+    @PostMapping("/remove/alike")
+    public String removeAlikeBooks(@RequestParam(value = "author") String author,
+                                   @RequestParam(value = "title") String title,
+                                   @RequestParam(value = "size") String size) {
+        logger.info("POST /books/remove/alike?author=" + author
+                + "&title=" + title
+                + "&size=" + size);
+        Book bookToRemove = Book.builder()
+                .author(author)
+                .title(title)
+                .size(size)
+                .build();
+
+        bookService.removeAlike(bookToRemove);
+        return "redirect:/books/shelf";
     }
 }

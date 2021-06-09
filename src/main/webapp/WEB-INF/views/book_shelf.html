@@ -17,6 +17,11 @@
             border-collapse: collapse;
         }
 
+        .button {
+            position: relative;
+            left: 30px
+        }
+
         table {
             margin: 25px;
         }
@@ -44,7 +49,7 @@
                     <input type="text" placeholder="book title" th:field="*{title}">
                 </td>
                 <td>
-                    <input type="text" placeholder="size (pages)" th:field="*{pages}">
+                    <input type="text" placeholder="size (pages)" th:field="*{size}">
                 </td>
                 <td>
                     <input type="submit" value="save">
@@ -66,6 +71,31 @@
         </table>
     </form>
 
+    <form method="post" th:action="@{/books/remove/alike}">
+        <table>
+            <tr>
+                <td>
+                    <input type="text" placeholder="author regex" th:name="author">
+                </td>
+                <td>
+                    <input type="text" placeholder="title regex" th:name="title">
+                </td>
+                <td>
+                    <input type="text" placeholder="size regex" th:name="size">
+                </td>
+                <td>
+                    <input type="submit" value="delete">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+
+
+    <form class="button" method="post" th:action="@{/books/generate}">
+        <input type="submit" value="generate random book">
+    </form>
+
     <table id="books">
         <tr>
             <th>id</th>
@@ -77,7 +107,7 @@
             <td th:text="${book.id}"></td>
             <td th:text="${book.author}"></td>
             <td th:text="${book.title}"></td>
-            <td th:text="${book.pages}"></td>
+            <td th:text="${book.size}"></td>
         </tr>
     </table>
 </div>

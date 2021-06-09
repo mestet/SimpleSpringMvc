@@ -15,12 +15,12 @@ public class Book {
     private Integer id;
     private String author;
     private String title;
-    private String pages;
+    private String size;
 
     public boolean hasAnyAttribute() {
         return (title != null && !title.isEmpty())
                 || (author != null && !author.isEmpty())
-                || (pages != null && !pages.isEmpty());
+                || (size != null && !size.isEmpty());
     }
 
 }
