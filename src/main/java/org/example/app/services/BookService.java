@@ -52,15 +52,15 @@ public class BookService {
 
     private boolean isBookAlike(Book example, Book candidate) {
         return checkNotNullAndMatch(example.getAuthor(), candidate.getAuthor())
-                || checkNotNullAndMatch(example.getTitle(), candidate.getTitle())
-                || checkNotNullAndMatch(example.getSize(), candidate.getSize());
+                && checkNotNullAndMatch(example.getTitle(), candidate.getTitle())
+                && checkNotNullAndMatch(example.getSize(), candidate.getSize());
     }
 
     private boolean checkNotNullAndMatch(String regex, String candidate) {
         if (regex == null || candidate == null) {
             return false;
         }
-        if (SEARCH_AS_SUBSTRING && !regex.isEmpty()) {
+        if (SEARCH_AS_SUBSTRING && !regex.isEmpty() && !candidate.isEmpty()) {
             regex = "(.*)" + regex + "(.*)";
         }
         return candidate.matches(regex);
