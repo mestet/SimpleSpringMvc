@@ -25,7 +25,7 @@ public class BooksController {
 
     @GetMapping("/shelf")
     public String bookShelf(Model model) {
-        logger.info("GET /books/shelf");
+        logger.info(this.toString());
         model.addAttribute("book", new Book());
         model.addAttribute("bookList", bookService.getAllBooks());
         return "book_shelf";
@@ -46,7 +46,7 @@ public class BooksController {
     }
 
     @PostMapping("/remove")
-    public String removeBook(@RequestParam(value = "bookId") Integer bookId, Model model) {
+    public String removeBook(@RequestParam(value = "bookId") String bookId, Model model) {
         logger.info("POST /books/remove?bookId=" + bookId);
         if (bookService.removeBookById(bookId)) {
             return "redirect:/books/shelf";

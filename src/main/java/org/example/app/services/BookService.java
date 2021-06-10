@@ -35,7 +35,7 @@ public class BookService {
         return repository.retrieveAll();
     }
 
-    public boolean removeBookById(Integer bookId) {
+    public boolean removeBookById(String bookId) {
         return repository.remove(Book.builder()
                 .id(bookId)
                 .build());
