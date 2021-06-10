@@ -18,7 +18,7 @@ public class BookImageController {
         this.bookImageService = bookImageService;
     }
 
-    @GetMapping("/book")
+    @GetMapping("/book/random")
     public ResponseEntity<byte[]> bookImage() {
         HttpHeaders headers = new HttpHeaders();
         headers.setCacheControl(CacheControl.noCache());
