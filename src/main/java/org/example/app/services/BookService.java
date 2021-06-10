@@ -35,10 +35,15 @@ public class BookService {
         return repository.retrieveAll();
     }
 
-    public boolean removeBookById(Integer bookId) {
-        return repository.remove(Book.builder()
-                .id(bookId)
-                .build());
+    public boolean removeBookById(String bookId) {
+        try {
+            return repository.remove(Book.builder()
+                    .id(Integer.valueOf(bookId))
+                    .build());
+        } catch (NumberFormatException e) {
+            logger.error("Try to remove book with invalid id: " + bookId, e);
+            return false;
+        }
     }
 
     public void removeAlike(Book bookWithRegex) {
@@ -52,15 +57,15 @@ public class BookService {
 
     private boolean isBookAlike(Book example, Book candidate) {
         return checkNotNullAndMatch(example.getAuthor(), candidate.getAuthor())
-                || checkNotNullAndMatch(example.getTitle(), candidate.getTitle())
-                || checkNotNullAndMatch(example.getSize(), candidate.getSize());
+                && checkNotNullAndMatch(example.getTitle(), candidate.getTitle())
+                && checkNotNullAndMatch(example.getSize(), candidate.getSize());
     }
 
     private boolean checkNotNullAndMatch(String regex, String candidate) {
         if (regex == null || candidate == null) {
             return false;
         }
-        if (SEARCH_AS_SUBSTRING && !regex.isEmpty()) {
+        if (SEARCH_AS_SUBSTRING && !regex.isEmpty() && !candidate.isEmpty()) {
             regex = "(.*)" + regex + "(.*)";
         }
         return candidate.matches(regex);
