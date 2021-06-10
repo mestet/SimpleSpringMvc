@@ -31,12 +31,16 @@
         th, td {
             border-bottom: 1px solid #ddd;
         }
+
+        #index_list {
+            position: absolute;
+        }
     </style>
 </head>
 <body>
 <div id="index_list" th:replace="index :: index_list"></div>
 <div id="root_container">
-    <!--/*@thymesVar id="book" type="org.example.web.dto.Book"*/-->
+    <!--/*@thymesVar id="criteriaBook" type="org.example.web.dto.Book"*/-->
     <form method="post" th:action="@{/books/search}" th:object="${criteriaBook}">
         <table>
             <tr>
@@ -64,6 +68,7 @@
             <th>title</th>
             <th>size</th>
         </tr>
+        <!--/*@thymesVar id="searchResultList" type="java.util.List"*/-->
         <tr th:each="book : ${searchResultList}">
             <td th:text="${book.id}"></td>
             <td th:text="${book.author}"></td>
